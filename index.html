@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mcusi Collective | Graphic Design Agency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --charcoal: #1A1A2E;
+            --navy: #16213E;
+            --coral: #FF6B6B;
+            --magenta: #E94560;
+            --yellow: #FFD93D;
+            --green: #6BCB77;
+            --off-white: #F9F9F9;
+            --light-gray: #E8E8E8;
+            --text-light: #B8B8C8;
+            --text-dark: #1A1A2E;
+            --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--charcoal);
+            color: var(--off-white);
+            overflow-x: hidden;
+            cursor: none;
+            line-height: 1.6;
+        }
+
+        /* ===== CUSTOM CURSOR ===== */
+        .cursor {
+            width: 12px;
+            height: 12px;
+            background: var(--coral);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.15s ease, background 0.3s ease, width 0.3s ease, height 0.3s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 107, 107, 0.4);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99998;
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            width: 60px;
+            height: 60px;
+            background: var(--yellow);
+        }
+
+        .cursor-follower.hover {
+            width: 80px;
+            height: 80px;
+            border-color: var(--yellow);
+        }
+
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--charcoal);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--coral), var(--yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .preloader-bar {
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .preloader-bar-inner {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--coral), var(--yellow));
+            border-radius: 3px;
+            animation: loadBar 1.8s ease-in-out forwards;
+        }
+
+        @keyframes loadBar {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        .nav.scrolled {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            color: var(--off-white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo span {
+            background: linear-gradient(135deg, var(--coral), var(--yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-logo i {
+            color: var(--coral);
+            font-size: 1.3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--coral), var(--yellow));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--off-white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--coral), var(--magenta));
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            transition: var(--transition);
+            box-shadow: 0 8px 20px -5px rgba(233, 69, 96, 0.4);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px -5px rgba(233, 69, 96, 0.6);
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        /* Mobile menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--off-white);
+            transition: var(--transition);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 6rem 3rem 3rem;
+            overflow: hidden;
+        }
+
+        .hero-bg-shapes {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: floatShape 20s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--coral);
+            top: -10%;
+            right: -5%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--yellow);
+            bottom: -15%;
+            left: -5%;
+            animation-delay: -5s;
+        }
+
+        .shape-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--green);
+            top: 40%;
+            left: 30%;
+            animation-delay: -10s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(40px, -40px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.95); }
+            75% { transform: translate(20px, 20px) scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-tagline {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .hero-tagline::before {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--coral);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.5s forwards;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--coral), var(--yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            max-width: 550px;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.7s forwards;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.9s forwards;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: none;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--coral), var(--magenta));
+            color: white;
+            box-shadow: 0 10px 30px -8px rgba(233, 69, 96, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 18px 40px -10px rgba(233, 69, 96, 0.7);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--off-white);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--coral);
+            color: var(--coral);
+            transform: translateY(-3px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.3s forwards;
+        }
+
+        .hero-scroll .line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--coral), transparent);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollLine {
+            0% { transform: scaleY(0); transform-origin: top; }
+            50% { transform: scaleY(1); transform-origin: top; }
+            50.1% { transform: scaleY(1); transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== MARQUEE ===== */
+        .marquee-section {
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 3rem;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-item {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.15);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .marquee-item i {
+            color: var(--coral);
+            font-size: 0.7rem;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .section {
+            padding: 6rem 3rem;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 30px;
+            height: 2px;
+            background: var(--coral);
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            max-width: 700px;
+        }
+
+        /* ===== STATS SECTION ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--coral), var(--yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* ===== WORK / PORTFOLIO ===== */
+        .work-filters {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.3rem;
+            border-radius: 50px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: none;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--coral);
+            border-color: var(--coral);
+            color: white;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .work-item {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4/3;
+            cursor: none;
+            transition: var(--transition);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .work-item.hidden {
+            display: none;
+        }
+
+        .work-item:hover {
+            transform: scale(1.02);
+        }
+
+        .work-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .work-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .work-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26, 26, 46, 0.95) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.8rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .work-item:hover .work-overlay {
+            opacity: 1;
+        }
+
+        .work-category {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 0.4rem;
+        }
+
+        .work-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-link {
+            font-size: 0.8rem;
+            color: var(--yellow);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Placeholder backgrounds for work items */
+        .work-placeholder-1 { background: linear-gradient(135deg, #2d1b3d, #e94560); }
+        .work-placeholder-2 { background: linear-gradient(135deg, #1b3d2d, #6bcb77); }
+        .work-placeholder-3 { background: linear-gradient(135deg, #3d2d1b, #ffd93d); }
+        .work-placeholder-4 { background: linear-gradient(135deg, #1b2d3d, #4d96ff); }
+        .work-placeholder-5 { background: linear-gradient(135deg, #3d1b2d, #ff6b6b); }
+        .work-placeholder-6 { background: linear-gradient(135deg, #2d3d1b, #a8e6cf); }
+
+        /* ===== SERVICES ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--coral), var(--yellow));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-8px);
+            border-color: rgba(255, 107, 107, 0.2);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(255, 217, 61, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--coral);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(-5deg);
+            background: linear-gradient(135deg, var(--coral), var(--yellow));
+            color: white;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .service-tag {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* ===== PROCESS ===== */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            position: relative;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 1.5rem;
+        }
+
+        .process-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--coral), var(--yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .process-step h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            padding: 3rem 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .testimonial-quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--off-white);
+            line-height: 1.7;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--coral);
+            line-height: 0;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: var(--coral);
+            margin-top: 0.2rem;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            cursor: none;
+            transition: var(--transition);
+            padding: 0;
+        }
+
+        .testimonial-dot.active {
+            background: var(--coral);
+            width: 30px;
+            border-radius: 10px;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-info p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 400px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-detail i {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 107, 107, 0.1);
+            color: var(--coral);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .social-link:hover {
+            background: var(--coral);
+            border-color: var(--coral);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.03em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--off-white);
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--coral);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: var(--magenta);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23B8B8C8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.1rem center;
+            cursor: none;
+        }
+
+        .form-group select option {
+            background: var(--charcoal);
+            color: var(--off-white);
+        }
+
+        .form-error {
+            font-size: 0.75rem;
+            color: var(--magenta);
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .form-error.visible {
+            display: block;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 50px;
+            border: none;
+            background: linear-gradient(135deg, var(--coral), var(--magenta));
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: none;
+            transition: var(--transition);
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            letter-spacing: 0.02em;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -8px rgba(233, 69, 96, 0.6);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .form-success.visible {
+            display: flex;
+        }
+
+        .form-success i {
+            font-size: 3rem;
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+
+        .form-success h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-success p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-logo span {
+            background: linear-gradient(135deg, var(--coral), var(--yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo i {
+            color: var(--coral);
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .work-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+            .nav {
+                padding: 1rem 1.5rem;
+            }
+            .nav.scrolled {
+                padding: 0.8rem 1.5rem;
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(26, 26, 46, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 2rem;
+                transition: right 0.4s ease;
+                padding: 2rem;
+            }
+            .nav-links.open {
+                right: 0;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+            .hero {
+                padding: 5rem 1.5rem 2rem;
+            }
+            .section {
+                padding: 4rem 1.5rem;
+            }
+            .work-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .testimonial-slide {
+                padding: 2rem 1.5rem;
+            }
+            .testimonial-quote {
+                font-size: 1.05rem;
+            }
+            .footer {
+                padding: 2rem 1.5rem;
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .contact-form {
+                padding: 1.5rem;
+            }
+            .btn {
+                padding: 0.8rem 1.6rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== PRELOADER ===== -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">MCUSI COLLECTIVE</div>
+        <div class="preloader-bar">
+            <div class="preloader-bar-inner"></div>
+        </div>
+    </div>
+
+    <!-- ===== CUSTOM CURSOR ===== -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-logo">
+            <i class="fas fa-palette"></i>
+            <span>MCUSI</span> COLLECTIVE
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#work">Work</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact" class="nav-cta">Start a Project</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-tagline">Graphic Design Agency</div>
+            <h1>We Design Brands<br>That <span class="highlight">Speak.</span></h1>
+            <p>Mcusi Collective is a creative studio crafting bold visual identities, immersive digital experiences, and design that demands attention.</p>
+            <div class="hero-actions">
+                <a href="#work" class="btn btn-primary">
+                    <i class="fas fa-eye"></i> View Our Work
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fas fa-paper-plane"></i> Start a Project
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="line"></div>
+        </div>
+    </section>
+
+    <!-- ===== MARQUEE ===== -->
+    <div class="marquee-section">
+        <div class="marquee-track" id="marqueeTrack">
+            <div class="marquee-item"><i class="fas fa-circle"></i> Brand Identity</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Logo Design</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Web Design</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Print Design</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Social Media</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Packaging</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Art Direction</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Motion Graphics</div>
+        </div>
+    </div>
+
+    <!-- ===== STATS ===== -->
+    <section class="section" id="about">
+        <div class="section-header reveal">
+            <div class="section-label">By the Numbers</div>
+            <h2 class="section-title">Creative impact, measured.</h2>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item reveal">
+                <div class="stat-number" data-target="150">0</div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-number" data-target="80">0</div>
+                <div class="stat-label">Happy Clients</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-number" data-target="12">0</div>
+                <div class="stat-label">Design Awards</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-number" data-target="6">0</div>
+                <div class="stat-label">Years of Craft</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WORK / PORTFOLIO ===== -->
+    <section class="section" id="work">
+        <div class="section-header reveal">
+            <div class="section-label">Selected Work</div>
+            <h2 class="section-title">Projects that made an impact.</h2>
+        </div>
+        <div class="work-filters reveal">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="branding">Branding</button>
+            <button class="filter-btn" data-filter="web">Web Design</button>
+            <button class="filter-btn" data-filter="print">Print</button>
+            <button class="filter-btn" data-filter="social">Social Media</button>
+            <button class="filter-btn" data-filter="packaging">Packaging</button>
+        </div>
+        <div class="work-grid" id="workGrid">
+            <div class="work-item reveal" data-category="branding">
+                <div class="work-placeholder-1" style="width:100%;height:100%;"></div>
+                <div class="work-overlay">
+                    <div class="work-category">Branding</div>
+                    <div class="work-title">Nova Coffee Roasters</div>
+                    <div class="work-link">View Case Study <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="work-item reveal" data-category="web">
+                <div class="work-placeholder-2" style="width:100%;height:100%;"></div>
+                <div class="work-overlay">
+                    <div class="work-category">Web Design</div>
+                    <div class="work-title">Pulse Fitness App</div>
+                    <div class="work-link">View Case Study <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="work-item reveal" data-category="print">
+                <div class="work-placeholder-3" style="width:100%;height:100%;"></div>
+                <div class="work-overlay">
+                    <div class="work-category">Print</div>
+                    <div class="work-title">Art Basel Catalogue</div>
+                    <div class="work-link">View Case Study <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="work-item reveal" data-category="social">
+                <div class="work-placeholder-4" style="width:100%;height:100%;"></div>
+                <div class="work-overlay">
+                    <div class="work-category">Social Media</div>
+                    <div class="work-title">Bloom Cosmetics</div>
+                    <div class="work-link">View Case Study <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="work-item reveal" data-category="packaging">
+                <div class="work-placeholder-5" style="width:100%;height:100%;"></div>
+                <div class="work-overlay">
+                    <div class="work-category">Packaging</div>
+                    <div class="work-title">Rooted Skincare</div>
+                    <div class="work-link">View Case Study <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="work-item reveal" data-category="branding">
+                <div class="work-placeholder-6" style="width:100%;height:100%;"></div>
+                <div class="work-overlay">
+                    <div class="work-category">Branding</div>
+                    <div class="work-title">Terra Architecture</div>
+                    <div class="work-link">View Case Study <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="section" id="services" style="background: rgba(255,255,255,0.02);">
+        <div class="section-header reveal">
+            <div class="section-label">What We Do</div>
+            <h2 class="section-title">Services built for bold brands.</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-fingerprint"></i></div>
+                <h3>Brand Identity</h3>
+                <p>Complete visual systems that capture your brand's essence—from logo to guidelines.</p>
+                <div class="service-tags">
+                    <span class="service-tag">Logo Design</span>
+                    <span class="service-tag">Brand Guidelines</span>
+                    <span class="service-tag">Visual System</span>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Web Design</h3>
+                <p>Immersive, responsive websites that convert visitors into loyal customers.</p>
+                <div class="service-tags">
+                    <span class="service-tag">UI/UX</span>
+                    <span class="service-tag">Development</span>
+                    <span class="service-tag">E-commerce</span>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-print"></i></div>
+                <h3>Print Design</h3>
+                <p>Tangible brand experiences—from business cards to large-format campaigns.</p>
+                <div class="service-tags">
+                    <span class="service-tag">Editorial</span>
+                    <span class="service-tag">Packaging</span>
+                    <span class="service-tag">Signage</span>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-hashtag"></i></div>
+                <h3>Social Media</h3>
+                <p>Scroll-stopping content and templates that keep your audience engaged.</p>
+                <div class="service-tags">
+                    <span class="service-tag">Templates</span>
+                    <span class="service-tag">Content</span>
+                    <span class="service-tag">Strategy</span>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-box-open"></i></div>
+                <h3>Packaging</h3>
+                <p>Shelf-ready packaging design that tells your product's story at a glance.</p>
+                <div class="service-tags">
+                    <span class="service-tag">Structural</span>
+                    <span class="service-tag">Label Design</span>
+                    <span class="service-tag">Mockups</span>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-film"></i></div>
+                <h3>Motion Graphics</h3>
+                <p>Animated brand assets, explainer videos, and dynamic social content.</p>
+                <div class="service-tags">
+                    <span class="service-tag">Animation</span>
+                    <span class="service-tag">Video</span>
+                    <span class="service-tag">GIFs</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section class="section">
+        <div class="section-header reveal">
+            <div class="section-label">How We Work</div>
+            <h2 class="section-title">A process as sharp as the results.</h2>
+        </div>
+        <div class="process-grid">
+            <div class="process-step reveal">
+                <div class="process-number">01</div>
+                <h4>Discovery</h4>
+                <p>We dive deep into your brand, audience, and goals.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-number">02</div>
+                <h4>Concept</h4>
+                <p>Bold ideas and directions tailored to your vision.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-number">03</div>
+                <h4>Design</h4>
+                <p>Pixel-perfect execution with obsessive attention to detail.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-number">04</div>
+                <h4>Delivery</h4>
+                <p>Final assets, guidelines, and support for launch.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section" id="testimonials" style="background: rgba(255,255,255,0.02);">
+        <div class="section-header reveal">
+            <div class="section-label">Client Love</div>
+            <h2 class="section-title">What our clients say.</h2>
+        </div>
+        <div class="testimonial-slider reveal">
+            <div class="testimonial-track" id="testimonialTrack">
+                <div class="testimonial-slide">
+                    <div class="testimonial-quote">Mcusi Collective transformed our brand from forgettable to unforgettable. Their design thinking is on another level.</div>
+                    <div class="testimonial-author">Sarah Mokoena</div>
+                    <div class="testimonial-role">Founder, Nova Coffee Roasters</div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial-quote">The team understood our vision immediately and delivered a website that exceeded every expectation. True creative partners.</div>
+                    <div class="testimonial-author">James van der Merwe</div>
+                    <div class="testimonial-role">CEO, Pulse Fitness</div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial-quote">Working with Mcusi Collective felt like adding a world-class design team to our company overnight. Incredible results.</div>
+                    <div class="testimonial-author">Amara Okafor</div>
+                    <div class="testimonial-role">Marketing Director, Bloom Cosmetics</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-nav" id="testimonialNav">
+            <button class="testimonial-dot active" data-index="0"></button>
+            <button class="testimonial-dot" data-index="1"></button>
+            <button class="testimonial-dot" data-index="2"></button>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section" id="contact">
+        <div class="section-header reveal">
+            <div class="section-label">Get in Touch</div>
+            <h2 class="section-title">Let's build something bold.</h2>
+        </div>
+        <div class="contact-wrapper">
+            <div class="contact-info reveal">
+                <h3>Start a project with us.</h3>
+                <p>Tell us about your vision. We'll get back to you within 24 hours with next steps.</p>
+                <div class="contact-details">
+                    <div class="contact-detail">
+                        <i class="fas fa-envelope"></i>
+                        <span>hello@mcusicollective.com</span>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+27 10 123 4567</span>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Johannesburg, South Africa</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                    <a href="#" class="social-link" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="contact-form reveal">
+                <form id="contactForm" novalidate>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your full name" required>
+                        <div class="form-error" id="nameError">Please enter your name.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                        <div class="form-error" id="emailError">Please enter a valid email.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Type</label>
+                        <select id="service" name="service" required>
+                            <option value="" disabled selected>Select a service</option>
+                            <option>Brand Identity</option>
+                            <option>Web Design</option>
+                            <option>Print Design</option>
+                            <option>Social Media</option>
+                            <option>Packaging</option>
+                            <option>Motion Graphics</option>
+                        </select>
+                        <div class="form-error" id="serviceError">Please select a service.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
+                        <div class="form-error" id="messageError">Please tell us about your project.</div>
+                    </div>
+                    <button type="submit" class="form-submit" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+                <div class="form-success" id="formSuccess">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>Message Sent!</h4>
+                    <p>Thank you for reaching out. We'll be in touch within 24 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-logo">
+            <i class="fas fa-palette"></i>
+            <span>MCUSI</span> COLLECTIVE
+        </div>
+        <div class="footer-copy">© 2025 Mcusi Collective. All rights reserved. Crafted with obsession.</div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== PRELOADER =====
+            const preloader = document.getElementById('preloader');
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }, 1800);
+            });
+
+            // ===== CUSTOM CURSOR =====
+            const cursor = document.getElementById('cursor');
+            const cursorFollower = document.getElementById('cursorFollower');
+            let mouseX = 0, mouseY = 0;
+            let followerX = 0, followerY = 0;
+
+            if (window.innerWidth > 768) {
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    cursor.style.left = mouseX + 'px';
+                    cursor.style.top = mouseY + 'px';
+                });
+
+                function animateFollower() {
+                    followerX += (mouseX - followerX) * 0.12;
+                    followerY += (mouseY - followerY) * 0.12;
+                    cursorFollower.style.left = followerX + 'px';
+                    cursorFollower.style.top = followerY + 'px';
+                    requestAnimationFrame(animateFollower);
+                }
+                animateFollower();
+
+                // Hover effects on interactive elements
+                const interactiveElements = document.querySelectorAll('a, button, .work-item, .service-card, .filter-btn, input, select, textarea');
+                interactiveElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursor.classList.add('hover');
+                        cursorFollower.classList.add('hover');
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursor.classList.remove('hover');
+                        cursorFollower.classList.remove('hover');
+                    });
+                });
+            }
+
+            // ===== NAVIGATION SCROLL =====
+            const nav = document.getElementById('nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            // ===== MOBILE MENU =====
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('open');
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('open');
+                });
+            });
+
+            // ===== SCROLL REVEAL =====
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // ===== ANIMATED COUNTERS =====
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const target = parseInt(el.getAttribute('data-target'));
+                        let current = 0;
+                        const increment = target / 60;
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                el.textContent = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                el.textContent = target + '+';
+                            }
+                        };
+                        updateCounter();
+                        counterObserver.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+            statNumbers.forEach(el => counterObserver.observe(el));
+
+            // ===== PORTFOLIO FILTER =====
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const workItems = document.querySelectorAll('.work-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.getAttribute('data-filter');
+
+                    workItems.forEach(item => {
+                        const category = item.getAttribute('data-category');
+                        if (filter === 'all' || category === filter) {
+                            item.classList.remove('hidden');
+                            item.style.opacity = '0';
+                            item.style.transform = 'scale(0.9)';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                            }, 50);
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // ===== TESTIMONIAL SLIDER =====
+            const track = document.getElementById('testimonialTrack');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            let currentSlide = 0;
+            const totalSlides = dots.length;
+            let autoSlideInterval;
+
+            function goToSlide(index) {
+                currentSlide = index;
+                track.style.transform = `translateX(-${index * 100}%)`;
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const index = parseInt(dot.getAttribute('data-index'));
+                    goToSlide(index);
+                    resetAutoSlide();
+                });
+            });
+
+            function nextSlide() {
+                goToSlide((currentSlide + 1) % totalSlides);
+            }
+
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(nextSlide, 5000);
+            }
+
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+
+            startAutoSlide();
+
+            // Pause on hover
+            const slider = document.querySelector('.testimonial-slider');
+            slider.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+            slider.addEventListener('mouseleave', startAutoSlide);
+
+            // ===== CONTACT FORM =====
+            const form = document.getElementById('contactForm');
+            const formSuccess = document.getElementById('formSuccess');
+            const submitBtn = document.getElementById('submitBtn');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let isValid = true;
+
+                // Validate name
+                const name = document.getElementById('name');
+                const nameError = document.getElementById('nameError');
+                if (!name.value.trim()) {
+                    name.classList.add('error');
+                    nameError.classList.add('visible');
+                    isValid = false;
+                } else {
+                    name.classList.remove('error');
+                    nameError.classList.remove('visible');
+                }
+
+                // Validate email
+                const email = document.getElementById('email');
+                const emailError = document.getElementById('emailError');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value.trim())) {
+                    email.classList.add('error');
+                    emailError.classList.add('visible');
+                    isValid = false;
+                } else {
+                    email.classList.remove('error');
+                    emailError.classList.remove('visible');
+                }
+
+                // Validate service
+                const service = document.getElementById('service');
+                const serviceError = document.getElementById('serviceError');
+                if (!service.value) {
+                    service.classList.add('error');
+                    serviceError.classList.add('visible');
+                    isValid = false;
+                } else {
+                    service.classList.remove('error');
+                    serviceError.classList.remove('visible');
+                }
+
+                // Validate message
+                const message = document.getElementById('message');
+                const messageError = document.getElementById('messageError');
+                if (!message.value.trim()) {
+                    message.classList.add('error');
+                    messageError.classList.add('visible');
+                    isValid = false;
+                } else {
+                    message.classList.remove('error');
+                    messageError.classList.remove('visible');
+                }
+
+                if (isValid) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+                    setTimeout(() => {
+                        form.style.display = 'none';
+                        formSuccess.classList.add('visible');
+                    }, 1500);
+                }
+            });
+
+            // Clear error on input
+            document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(field => {
+                field.addEventListener('input', () => {
+                    field.classList.remove('error');
+                    const error = field.parentElement.querySelector('.form-error');
+                    if (error) error.classList.remove('visible');
+                });
+            });
+
+            // ===== MARQUEE DUPLICATION =====
+            const marqueeTrack = document.getElementById('marqueeTrack');
+            marqueeTrack.innerHTML += marqueeTrack.innerHTML;
+
+        })();
+    </script>
+
+</body>
+</html>
