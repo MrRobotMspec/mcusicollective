@@ -1,0 +1,3077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mcusi Collective | Strategic Graphic Design Studio</title>
+    <meta name="description" content="Mcusi Collective — bold branding, graphic design, and digital experiences that give your brand direction. Professional creative studio.">
+    <meta name="keywords" content="graphic design, branding, logo design, web design, creative agency, digital design">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mcusi Collective | Strategic Graphic Design Studio">
+    <meta property="og:description" content="Bold branding, graphic design, and digital experiences that give your brand direction.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://mcusicollective.com/og-image.jpg">
+    <meta property="og:url" content="https://mcusicollective.com">
+    <!-- Favicon placeholder -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2300B4B4'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy-deep: #0B1E2D;
+            --navy-mid: #0E2A3A;
+            --blue-green: #0A3A4A;
+            --cyan: #00D4D4;
+            --cyan-dark: #00A8A8;
+            --cyan-glow: rgba(0, 212, 212, 0.25);
+            --white: #FFFFFF;
+            --off-white: #F7F9FC;
+            --light-grey: #E8EDF2;
+            --text-primary: #1A2B3C;
+            --text-secondary: #4A5A6A;
+            --text-light: #B0C4D0;
+            --beige: #F2EDE4;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.10);
+            --shadow-lg: 0 24px 48px -12px rgba(0, 0, 0, 0.25);
+            --radius-card: 24px;
+            --radius-pill: 60px;
+            --transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--off-white);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            cursor: none;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== CUSTOM CURSOR ===== */
+        .cursor {
+            width: 10px;
+            height: 10px;
+            background: var(--cyan);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.15s ease, background 0.3s ease, width 0.3s ease, height 0.3s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid rgba(0, 212, 212, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99998;
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            width: 50px;
+            height: 50px;
+            background: var(--cyan);
+        }
+
+        .cursor-follower.hover {
+            width: 70px;
+            height: 70px;
+            border-color: var(--cyan);
+            background: rgba(0, 212, 212, 0.08);
+        }
+
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--navy-deep);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+
+        .preloader-logo span {
+            color: var(--cyan);
+        }
+
+        .preloader-bar {
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .preloader-bar-inner {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--cyan), var(--cyan-dark));
+            border-radius: 3px;
+            animation: loadBar 1.6s ease-in-out forwards;
+        }
+
+        @keyframes loadBar {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.4rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        .nav.scrolled {
+            background: rgba(11, 30, 45, 0.92);
+            backdrop-filter: blur(24px);
+            padding: 0.9rem 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+        }
+
+        .nav-logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo i {
+            color: var(--cyan);
+            font-size: 1.2rem;
+        }
+
+        .nav-logo span {
+            color: var(--cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--cyan);
+            color: var(--navy-deep) !important;
+            padding: 0.6rem 1.6rem;
+            border-radius: var(--radius-pill);
+            font-weight: 700 !important;
+            transition: var(--transition);
+            box-shadow: 0 8px 20px -6px rgba(0, 212, 212, 0.4);
+        }
+
+        .nav-cta:hover {
+            background: #00E5E5;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px -6px rgba(0, 212, 212, 0.6);
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        /* Mobile menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 7rem 3rem 4rem;
+            overflow: hidden;
+            background: var(--navy-deep);
+        }
+
+        .hero-bg-shapes {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.06;
+            background-image:
+                linear-gradient(30deg, var(--cyan) 12%, transparent 12.5%, transparent 87%, var(--cyan) 87.5%, var(--cyan)),
+                linear-gradient(150deg, var(--cyan) 12%, transparent 12.5%, transparent 87%, var(--cyan) 87.5%, var(--cyan)),
+                linear-gradient(30deg, var(--cyan) 12%, transparent 12.5%, transparent 87%, var(--cyan) 87.5%, var(--cyan)),
+                linear-gradient(150deg, var(--cyan) 12%, transparent 12.5%, transparent 87%, var(--cyan) 87.5%, var(--cyan)),
+                linear-gradient(60deg, rgba(0, 212, 212, 0.5) 25%, transparent 25.5%, transparent 75%, rgba(0, 212, 212, 0.5) 75%, rgba(0, 212, 212, 0.5));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.12;
+            animation: floatShape 22s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 550px;
+            height: 550px;
+            background: var(--cyan);
+            top: -12%;
+            right: -8%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 380px;
+            height: 380px;
+            background: #00A8A8;
+            bottom: -10%;
+            left: -5%;
+            animation-delay: -6s;
+        }
+
+        .shape-3 {
+            width: 280px;
+            height: 280px;
+            background: #007B8A;
+            top: 45%;
+            left: 35%;
+            animation-delay: -12s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.08); }
+            50% { transform: translate(-25px, 25px) scale(0.94); }
+            75% { transform: translate(15px, 15px) scale(1.04); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+        }
+
+        .hero-tagline {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .hero-tagline::before {
+            content: '';
+            width: 44px;
+            height: 2px;
+            background: var(--cyan);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.6rem, 6.5vw, 5.2rem);
+            font-weight: 900;
+            line-height: 1.06;
+            letter-spacing: -0.035em;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.5s forwards;
+        }
+
+        .hero h1 .highlight {
+            color: var(--cyan);
+        }
+
+        .hero p {
+            font-size: 1.12rem;
+            color: var(--text-light);
+            max-width: 520px;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.7s forwards;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.9s forwards;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 2.2rem;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 0.92rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: none;
+            letter-spacing: 0.02em;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--cyan);
+            color: var(--navy-deep);
+            box-shadow: 0 10px 30px -8px rgba(0, 212, 212, 0.5);
+        }
+
+        .btn-primary:hover {
+            background: #00E5E5;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 18px 40px -10px rgba(0, 212, 212, 0.7);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+            transform: translateY(-3px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.3s forwards;
+        }
+
+        .hero-scroll .line {
+            width: 1px;
+            height: 36px;
+            background: linear-gradient(to bottom, var(--cyan), transparent);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollLine {
+            0% { transform: scaleY(0); transform-origin: top; }
+            50% { transform: scaleY(1); transform-origin: top; }
+            50.1% { transform: scaleY(1); transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== SERVICE CATEGORY PILLS (hero) ===== */
+        .hero-service-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 2.2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 1.1s forwards;
+        }
+
+        .hero-service-pill {
+            padding: 0.45rem 1.2rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-light);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            transition: var(--transition);
+        }
+
+        .hero-service-pill:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+            background: rgba(0, 212, 212, 0.06);
+        }
+
+        /* ===== MARQUEE ===== */
+        .marquee-section {
+            padding: 1.8rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            background: var(--navy-mid);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 3rem;
+            animation: marquee 32s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-item {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.12);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .marquee-item i {
+            color: var(--cyan);
+            font-size: 0.6rem;
+            opacity: 0.6;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .section {
+            padding: 6rem 3rem;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 3.2rem;
+        }
+
+        .section-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--cyan-dark);
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 32px;
+            height: 2px;
+            background: var(--cyan);
+        }
+
+        .section-title {
+            font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.15;
+            color: var(--navy-deep);
+            max-width: 680px;
+        }
+
+        .section-title .accent {
+            color: var(--cyan-dark);
+        }
+
+        /* ===== INTRODUCTION SECTION ===== */
+        .intro-section {
+            background: var(--white);
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .intro-content h2 {
+            font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--navy-deep);
+        }
+
+        .intro-content h2 .accent {
+            color: var(--cyan-dark);
+        }
+
+        .intro-content p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.2rem;
+            max-width: 560px;
+            line-height: 1.75;
+        }
+
+        .intro-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .intro-geo {
+            width: 260px;
+            height: 260px;
+            position: relative;
+        }
+
+        .intro-geo .circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--cyan);
+            opacity: 0.2;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .intro-geo .circle:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border-color: var(--cyan-dark);
+            opacity: 0.3;
+        }
+
+        .intro-geo .circle:nth-child(3) {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            border-color: var(--cyan);
+            opacity: 0.5;
+        }
+
+        .intro-geo .dot {
+            width: 16px;
+            height: 16px;
+            background: var(--cyan);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 30px rgba(0, 212, 212, 0.5);
+        }
+
+        /* ===== "WHAT I CREATE" CARDS ===== */
+        .create-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.4rem;
+        }
+
+        .create-card {
+            background: var(--white);
+            border: 1px solid var(--light-grey);
+            border-radius: var(--radius-card);
+            padding: 2rem 1.6rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: none;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .create-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--cyan);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .create-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .create-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(0, 212, 212, 0.25);
+        }
+
+        .create-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: rgba(0, 212, 212, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--cyan-dark);
+            margin-bottom: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .create-card:hover .create-icon {
+            background: var(--cyan);
+            color: var(--navy-deep);
+            transform: scale(1.08) rotate(-4deg);
+        }
+
+        .create-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--navy-deep);
+        }
+
+        .create-card p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== STATS SECTION (dark) ===== */
+        .stats-section {
+            background: var(--navy-deep);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section .section-label {
+            color: var(--cyan);
+        }
+
+        .stats-section .section-label::before {
+            background: var(--cyan);
+        }
+
+        .stats-section .section-title {
+            color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-radius: var(--radius-card);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-4px);
+            border-color: rgba(0, 212, 212, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: var(--cyan);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* ===== PORTFOLIO ===== */
+        .portfolio-section {
+            background: var(--off-white);
+        }
+
+        .work-filters {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.3rem;
+            border-radius: var(--radius-pill);
+            background: transparent;
+            border: 1.5px solid var(--light-grey);
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: none;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--cyan);
+            border-color: var(--cyan);
+            color: var(--navy-deep);
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .work-item {
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4/3;
+            cursor: none;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            background: var(--white);
+        }
+
+        .work-item.hidden {
+            display: none;
+        }
+
+        .work-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .work-item .work-visual {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .work-item:hover .work-visual {
+            transform: scale(1.08);
+        }
+
+        .work-visual-1 { background: linear-gradient(135deg, #0B1E2D 0%, #00D4D4 100%); }
+        .work-visual-2 { background: linear-gradient(135deg, #0A3A4A 0%, #00A8A8 100%); }
+        .work-visual-3 { background: linear-gradient(135deg, #0E2A3A 0%, #007B8A 100%); }
+        .work-visual-4 { background: linear-gradient(135deg, #0B1E2D 0%, #4DD0E1 100%); }
+        .work-visual-5 { background: linear-gradient(135deg, #0A3A4A 0%, #00B4B4 100%); }
+        .work-visual-6 { background: linear-gradient(135deg, #0E2A3A 0%, #26C6DA 100%); }
+
+        .work-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(11, 30, 45, 0.94) 0%, transparent 55%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.8rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .work-item:hover .work-overlay {
+            opacity: 1;
+        }
+
+        .work-category {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-bottom: 0.35rem;
+        }
+
+        .work-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: var(--white);
+        }
+
+        .work-desc {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .work-link {
+            font-size: 0.78rem;
+            color: var(--cyan);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: gap 0.3s ease;
+        }
+
+        .work-item:hover .work-link {
+            gap: 0.7rem;
+        }
+
+        /* ===== SERVICES ===== */
+        .services-section {
+            background: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--off-white);
+            border: 1px solid var(--light-grey);
+            border-radius: var(--radius-card);
+            padding: 2.2rem 1.8rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--cyan);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            background: var(--white);
+            transform: translateY(-6px);
+            border-color: rgba(0, 212, 212, 0.25);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            background: rgba(0, 212, 212, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--cyan-dark);
+            margin-bottom: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(-5deg);
+            background: var(--cyan);
+            color: var(--navy-deep);
+        }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--navy-deep);
+        }
+
+        .service-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 1.2rem;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .service-tag {
+            font-size: 0.68rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: var(--radius-pill);
+            background: rgba(0, 212, 212, 0.06);
+            color: var(--cyan-dark);
+            border: 1px solid rgba(0, 212, 212, 0.12);
+            font-weight: 500;
+        }
+
+        .service-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 1rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--cyan-dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .service-cta:hover {
+            gap: 0.7rem;
+            color: var(--navy-deep);
+        }
+
+        /* ===== CLIENT SERVICE POLICY ===== */
+        .policy-section {
+            background: var(--navy-deep);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .policy-section .section-label {
+            color: var(--cyan);
+        }
+
+        .policy-section .section-label::before {
+            background: var(--cyan);
+        }
+
+        .policy-section .section-title {
+            color: var(--white);
+        }
+
+        .policy-header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .policy-brand-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .policy-brand-badge .brand-mark {
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            color: var(--white);
+        }
+
+        .policy-brand-badge .brand-mark span {
+            color: var(--cyan);
+        }
+
+        .policy-brand-badge .brand-tag {
+            padding: 0.35rem 1rem;
+            border-radius: var(--radius-pill);
+            background: var(--cyan);
+            color: var(--navy-deep);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .policy-tagline {
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--radius-pill);
+            background: rgba(0, 212, 212, 0.1);
+            border: 1px solid rgba(0, 212, 212, 0.25);
+            color: var(--cyan);
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .policy-main-title {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+        }
+
+        .policy-main-title .accent {
+            color: var(--cyan);
+        }
+
+        .policy-subtitle {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--cyan);
+            margin-bottom: 1rem;
+        }
+
+        .policy-intro-text {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            max-width: 680px;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+        }
+
+        .policy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem 3rem;
+        }
+
+        .policy-item {
+            display: flex;
+            gap: 1.2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .policy-item-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .policy-item-icon::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--cyan);
+        }
+
+        .policy-item-content h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.6rem;
+        }
+
+        .policy-item-content p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 0.6rem;
+        }
+
+        .policy-item-content .policy-highlight {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--cyan);
+            line-height: 1.6;
+        }
+
+        .policy-footer-block {
+            margin-top: 3rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .policy-footer-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .policy-footer-tag {
+            padding: 0.35rem 1rem;
+            border-radius: var(--radius-pill);
+            border: 1.5px solid var(--cyan);
+            color: var(--cyan);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .policy-footer-cta h4 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .policy-footer-cta p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* ===== POLICY FOOTER QR (WhatsApp) ===== */
+        .policy-footer-qr {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1.2rem 1.5rem;
+            border-radius: var(--radius-card);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 212, 212, 0.2);
+            transition: var(--transition);
+        }
+
+        .policy-footer-qr:hover {
+            border-color: var(--cyan);
+            background: rgba(0, 212, 212, 0.05);
+        }
+
+        .policy-footer-qr .qr-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--white);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .policy-footer-qr canvas {
+            border-radius: 12px;
+            background: var(--white);
+            padding: 6px;
+            width: 110px;
+            height: 110px;
+            display: block;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .policy-footer-qr .qr-number {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--cyan);
+            letter-spacing: 0.04em;
+        }
+
+        .policy-wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: var(--radius-pill);
+            background: #25D366;
+            color: #0B1E2D;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: none;
+            margin-top: 0.2rem;
+        }
+
+        .policy-wa-btn:hover {
+            background: #20BD5A;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -6px rgba(37, 211, 102, 0.5);
+        }
+
+        /* ===== BOOKING POLICY ===== */
+        .booking-section {
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-brand-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .booking-brand-row .brand-mark {
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            color: var(--navy-deep);
+        }
+
+        .booking-brand-row .brand-mark span {
+            color: var(--cyan-dark);
+        }
+
+        .booking-brand-row .brand-sub {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        .booking-notice-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 1.2rem;
+            border-radius: var(--radius-pill);
+            border: 2px solid var(--cyan);
+            color: var(--cyan-dark);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-main-title {
+            font-size: clamp(2.4rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            color: var(--navy-deep);
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-main-title .accent {
+            color: var(--cyan-dark);
+        }
+
+        .booking-lead {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 620px;
+            margin-bottom: 2rem;
+        }
+
+        .booking-lead strong {
+            font-weight: 800;
+            color: var(--navy-deep);
+        }
+
+        .booking-bullets {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .booking-bullets li {
+            position: relative;
+            padding-left: 1.8rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.7rem;
+            line-height: 1.6;
+        }
+
+        .booking-bullets li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.55em;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--cyan);
+        }
+
+        .booking-process-header {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--navy-deep);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .booking-process-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--light-grey);
+        }
+
+        .booking-process-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .booking-step {
+            text-align: center;
+        }
+
+        .booking-step-circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 2px solid var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--cyan-dark);
+            transition: var(--transition);
+        }
+
+        .booking-step:hover .booking-step-circle {
+            background: var(--cyan);
+            color: var(--navy-deep);
+            transform: scale(1.05);
+        }
+
+        .booking-step h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--navy-deep);
+            line-height: 1.4;
+        }
+
+        .booking-step p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.2rem;
+        }
+
+        .booking-cta-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: var(--radius-card);
+            background: var(--off-white);
+            border: 1px solid var(--light-grey);
+        }
+
+        .booking-cta-block .qr-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--navy-deep);
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .booking-cta-block canvas {
+            border-radius: 12px;
+            background: var(--white);
+            padding: 6px;
+            width: 110px;
+            height: 110px;
+            display: block;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonial-section {
+            background: var(--off-white);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border: 1px solid var(--light-grey);
+            border-radius: var(--radius-card);
+            padding: 2rem 1.8rem;
+            transition: var(--transition);
+            cursor: none;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(0, 212, 212, 0.2);
+        }
+
+        .testimonial-stars {
+            color: var(--cyan);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-quote {
+            font-size: 0.92rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 2.5rem;
+            color: var(--cyan);
+            line-height: 0;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-style: normal;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--navy-deep);
+        }
+
+        .testimonial-role {
+            font-size: 0.78rem;
+            color: var(--cyan-dark);
+            margin-top: 0.15rem;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-section {
+            background: var(--navy-deep);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section .section-label {
+            color: var(--cyan);
+        }
+
+        .contact-section .section-label::before {
+            background: var(--cyan);
+        }
+
+        .contact-section .section-title {
+            color: var(--white);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 1rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.02em;
+            color: var(--white);
+        }
+
+        .contact-info > p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 400px;
+            font-size: 0.95rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .contact-detail i {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(0, 212, 212, 0.08);
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* ===== WHATSAPP QR CODE (Main Contact) ===== */
+        .whatsapp-qr-block {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 1.5rem;
+            border-radius: var(--radius-card);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 212, 212, 0.2);
+            transition: var(--transition);
+        }
+
+        .whatsapp-qr-block:hover {
+            border-color: var(--cyan);
+            background: rgba(0, 212, 212, 0.04);
+        }
+
+        .whatsapp-qr-header {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            width: 100%;
+        }
+
+        .whatsapp-qr-header i {
+            font-size: 1.6rem;
+            color: #25D366;
+        }
+
+        .whatsapp-qr-header-text h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.1rem;
+        }
+
+        .whatsapp-qr-header-text p {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .whatsapp-qr-canvas-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        #whatsappQrCanvas {
+            border-radius: 12px;
+            background: var(--white);
+            padding: 8px;
+            width: 140px;
+            height: 140px;
+            display: block;
+        }
+
+        .whatsapp-qr-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .whatsapp-qr-info .wa-number {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--cyan);
+            letter-spacing: 0.02em;
+        }
+
+        .whatsapp-qr-info .wa-hint {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            line-height: 1.5;
+            max-width: 180px;
+        }
+
+        .whatsapp-qr-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1.2rem;
+            border-radius: var(--radius-pill);
+            background: #25D366;
+            color: #0B1E2D;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            margin-top: 0.3rem;
+            cursor: none;
+            border: none;
+            font-family: inherit;
+        }
+
+        .whatsapp-qr-btn:hover {
+            background: #20BD5A;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -6px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-card);
+            padding: 2.2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--white);
+            font-size: 0.88rem;
+            font-family: inherit;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--cyan);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 0 3px rgba(0, 212, 212, 0.1);
+        }
+
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #E94560;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23B0C4D0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            cursor: none;
+        }
+
+        .form-group select option {
+            background: var(--navy-deep);
+            color: var(--white);
+        }
+
+        .form-error {
+            font-size: 0.72rem;
+            color: #E94560;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-error.visible {
+            display: block;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 0.95rem;
+            border-radius: var(--radius-pill);
+            border: none;
+            background: var(--cyan);
+            color: var(--navy-deep);
+            font-size: 0.92rem;
+            font-weight: 700;
+            cursor: none;
+            transition: var(--transition);
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            letter-spacing: 0.02em;
+            margin-top: 0.5rem;
+        }
+
+        .form-submit:hover {
+            background: #00E5E5;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -8px rgba(0, 212, 212, 0.5);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .form-success.visible {
+            display: flex;
+        }
+
+        .form-success i {
+            font-size: 2.8rem;
+            color: var(--cyan);
+            margin-bottom: 1rem;
+        }
+
+        .form-success h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
+            color: var(--white);
+        }
+
+        .form-success p {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            background: var(--navy-deep);
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .footer-brand .footer-logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-brand .footer-logo i {
+            color: var(--cyan);
+        }
+
+        .footer-brand .footer-logo span {
+            color: var(--cyan);
+        }
+
+        .footer-brand p {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            max-width: 280px;
+            line-height: 1.6;
+        }
+
+        .footer-col h5 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col a {
+            display: block;
+            font-size: 0.82rem;
+            color: var(--text-light);
+            text-decoration: none;
+            margin-bottom: 0.6rem;
+            transition: var(--transition);
+        }
+
+        .footer-col a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-bottom {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 0.5rem;
+        }
+
+        .footer-bottom p {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+
+        .footer-bottom a {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--cyan);
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .create-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .booking-process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .booking-cta-block {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .work-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .create-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer {
+                grid-template-columns: 1fr 1fr;
+            }
+            .intro-grid {
+                grid-template-columns: 1fr;
+            }
+            .intro-visual {
+                display: none;
+            }
+            .policy-grid {
+                grid-template-columns: 1fr;
+            }
+            .booking-process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .policy-footer-block {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+            .nav {
+                padding: 1rem 1.5rem;
+            }
+            .nav.scrolled {
+                padding: 0.8rem 1.5rem;
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(11, 30, 45, 0.98);
+                backdrop-filter: blur(24px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 2rem;
+                transition: right 0.4s ease;
+                padding: 2rem;
+            }
+            .nav-links.open {
+                right: 0;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+            .section {
+                padding: 4rem 1.5rem;
+            }
+            .work-grid,
+            .services-grid,
+            .create-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .footer {
+                grid-template-columns: 1fr;
+                padding: 2rem 1.5rem;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-service-pills {
+                justify-content: flex-start;
+            }
+            .whatsapp-qr-canvas-wrap {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .booking-process-grid {
+                grid-template-columns: 1fr;
+            }
+            .booking-main-title {
+                font-size: 2.4rem;
+            }
+            .policy-main-title {
+                font-size: 2.2rem;
+            }
+            .booking-brand-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .contact-form {
+                padding: 1.5rem;
+            }
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.82rem;
+            }
+            .hero-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .policy-header-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .booking-main-title {
+                font-size: 2rem;
+            }
+            .policy-main-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== PRELOADER ===== -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">MCUSI <span>COLLECTIVE</span></div>
+        <div class="preloader-bar">
+            <div class="preloader-bar-inner"></div>
+        </div>
+    </div>
+
+    <!-- ===== CUSTOM CURSOR ===== -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-logo">
+            <i class="fas fa-palette"></i>
+            MCUSI <span>COLLECTIVE</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#work" class="nav-link">Portfolio</a></li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+            <li><a href="#contact" class="nav-cta">Start a Project</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-bg-shapes">
+            <div class="hero-pattern"></div>
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-tagline">Strategic Graphic Design Studio</div>
+            <h1>Creative Design That Gives Your Brand <span class="highlight">Direction.</span></h1>
+            <p>Graphic design, branding and digital experiences created to help businesses communicate with clarity and confidence.</p>
+            <div class="hero-actions">
+                <a href="#work" class="btn btn-primary">
+                    <i class="fas fa-eye"></i> View My Work
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fas fa-paper-plane"></i> Start a Project
+                </a>
+            </div>
+            <div class="hero-service-pills">
+                <span class="hero-service-pill">Branding</span>
+                <span class="hero-service-pill">Graphic Design</span>
+                <span class="hero-service-pill">Digital Design</span>
+                <span class="hero-service-pill">Web Design</span>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="line"></div>
+        </div>
+    </section>
+
+    <!-- ===== MARQUEE ===== -->
+    <div class="marquee-section">
+        <div class="marquee-track" id="marqueeTrack">
+            <div class="marquee-item"><i class="fas fa-circle"></i> Brand Identity</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Logo Design</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Web Design</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Print Design</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Social Media</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Packaging</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Art Direction</div>
+            <div class="marquee-item"><i class="fas fa-circle"></i> Motion Graphics</div>
+        </div>
+    </div>
+
+    <!-- ===== INTRODUCTION ===== -->
+    <section class="section intro-section" id="about-intro">
+        <div class="intro-grid">
+            <div class="intro-content reveal">
+                <div class="section-label">The Approach</div>
+                <h2>Design that <span class="accent">thinks</span> before it speaks.</h2>
+                <p>Mcusi Collective is a strategic creative studio. I don't just make things look good — I build visual systems that help businesses communicate with purpose, clarity, and confidence.</p>
+                <p>Every project starts with understanding your audience, your goals, and the story you need to tell. The result is design that works as hard as it looks.</p>
+            </div>
+            <div class="intro-visual reveal">
+                <div class="intro-geo">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHAT I CREATE ===== -->
+    <section class="section" id="services-overview" style="background: var(--off-white);">
+        <div class="section-header reveal">
+            <div class="section-label">What I Create</div>
+            <h2 class="section-title">Design services built for <span class="accent">bold brands.</span></h2>
+        </div>
+        <div class="create-grid">
+            <div class="create-card reveal">
+                <div class="create-icon"><i class="fas fa-fingerprint"></i></div>
+                <h3>Logo & Brand Identity</h3>
+                <p>Complete visual systems that capture your brand's essence and set you apart.</p>
+            </div>
+            <div class="create-card reveal">
+                <div class="create-icon"><i class="fas fa-file-alt"></i></div>
+                <h3>Marketing Materials</h3>
+                <p>Flyers, posters, brochures, and collateral that demand attention.</p>
+            </div>
+            <div class="create-card reveal">
+                <div class="create-icon"><i class="fas fa-hashtag"></i></div>
+                <h3>Social Media Design</h3>
+                <p>Scroll-stopping content and templates that keep your audience engaged.</p>
+            </div>
+            <div class="create-card reveal">
+                <div class="create-icon"><i class="fas fa-book"></i></div>
+                <h3>Corporate Profiles</h3>
+                <p>Professional company profiles and documents that build trust.</p>
+            </div>
+            <div class="create-card reveal">
+                <div class="create-icon"><i class="fas fa-chart-bar"></i></div>
+                <h3>Presentations</h3>
+                <p>Pitch decks and presentation design that win over rooms.</p>
+            </div>
+            <div class="create-card reveal">
+                <div class="create-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Website Design</h3>
+                <p>Immersive, responsive websites that convert visitors into customers.</p>
+            </div>
+            <div class="create-card reveal">
+                <div class="create-icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>Digital Graphics</h3>
+                <p>Custom digital assets for every platform and purpose.</p>
+            </div>
+            <div class="create-card reveal">
+                <div class="create-icon"><i class="fas fa-bullhorn"></i></div>
+                <h3>Advertising & Campaign Design</h3>
+                <p>Multi-channel campaign visuals that tell a cohesive brand story.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="section stats-section" id="about">
+        <div class="section-header reveal">
+            <div class="section-label">By the Numbers</div>
+            <h2 class="section-title">Creative impact, measured.</h2>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item reveal">
+                <div class="stat-number" data-target="150">0</div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-number" data-target="80">0</div>
+                <div class="stat-label">Happy Clients</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-number" data-target="12">0</div>
+                <div class="stat-label">Design Awards</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-number" data-target="6">0</div>
+                <div class="stat-label">Years of Craft</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PORTFOLIO ===== -->
+    <section class="section portfolio-section" id="work">
+        <div class="section-header reveal">
+            <div class="section-label">Selected Work</div>
+            <h2 class="section-title">Projects that made an <span class="accent">impact.</span></h2>
+        </div>
+        <div class="work-filters reveal">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="branding">Branding</button>
+            <button class="filter-btn" data-filter="logo">Logo Design</button>
+            <button class="filter-btn" data-filter="corporate">Corporate Design</button>
+            <button class="filter-btn" data-filter="social">Social Media</button>
+            <button class="filter-btn" data-filter="marketing">Marketing</button>
+            <button class="filter-btn" data-filter="web">Web Design</button>
+            <button class="filter-btn" data-filter="digital">Digital Design</button>
+        </div>
+        <div class="work-grid" id="workGrid">
+            <div class="work-item reveal" data-category="branding">
+                <div class="work-visual work-visual-1" style="width:100%;height:100%;"></div>
+                <div class="work-overlay">
+                    <div class="work-category">Branding</div>
+                    <div class="work-title">Nova Coffee Roasters</div>
+                    <div class="work-desc">Complete brand identity for a specialty coffee roastery.</div>
+                    <div class="work-link">View Project <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="work-item reveal" data-category="web">
+                <div class="work-visual work-visual-2" style="width:100%;height:100%;"></div>
+                <div class="work-overlay">
+                    <div class="work-category">Web Design</div>
+                    <div class="work-title">Pulse Fitness App</div>
+                    <div class="work-desc">UI/UX and responsive web design for a fitness platform.</div>
+                    <div class="work-link">View Project <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="work-item reveal" data-category="marketing">
+                <div class="work-visual work-visual-3" style="width:100%;height:100%;"></div>
+                <div class="work-overlay">
+                    <div class="work-category">Marketing</div>
+                    <div class="work-title">Art Basel Catalogue</div>
+                    <div class="work-desc">Editorial design and print collateral for an art exhibition.</div>
+                    <div class="work-link">View Project <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="work-item reveal" data-category="social">
+                <div class="work-visual work-visual-4" style="width:100%;height:100%;"></div>
+                <div class="work-overlay">
+                    <div class="work-category">Social Media</div>
+                    <div class="work-title">Bloom Cosmetics</div>
+                    <div class="work-desc">Social media branding and content design for a beauty brand.</div>
+                    <div class="work-link">View Project <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="work-item reveal" data-category="branding">
+                <div class="work-visual work-visual-5" style="width:100%;height:100%;"></div>
+                <div class="work-overlay">
+                    <div class="work-category">Branding</div>
+                    <div class="work-title">Rooted Skincare</div>
+                    <div class="work-desc">Packaging and brand identity for a natural skincare line.</div>
+                    <div class="work-link">View Project <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="work-item reveal" data-category="corporate">
+                <div class="work-visual work-visual-6" style="width:100%;height:100%;"></div>
+                <div class="work-overlay">
+                    <div class="work-category">Corporate Design</div>
+                    <div class="work-title">Terra Architecture</div>
+                    <div class="work-desc">Corporate identity and stationery for an architecture firm.</div>
+                    <div class="work-link">View Project <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="section services-section" id="services">
+        <div class="section-header reveal">
+            <div class="section-label">What I Do</div>
+            <h2 class="section-title">Services built for <span class="accent">bold brands.</span></h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-fingerprint"></i></div>
+                <h3>Brand Identity</h3>
+                <p>Complete visual systems that capture your brand's essence—from logo to guidelines.</p>
+                <div class="service-tags">
+                    <span class="service-tag">Logo Design</span>
+                    <span class="service-tag">Brand Guidelines</span>
+                    <span class="service-tag">Visual System</span>
+                </div>
+                <a href="#contact" class="service-cta">Start a Project <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Web Design</h3>
+                <p>Immersive, responsive websites that convert visitors into loyal customers.</p>
+                <div class="service-tags">
+                    <span class="service-tag">UI/UX</span>
+                    <span class="service-tag">Development</span>
+                    <span class="service-tag">E-commerce</span>
+                </div>
+                <a href="#contact" class="service-cta">Start a Project <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-print"></i></div>
+                <h3>Print Design</h3>
+                <p>Tangible brand experiences—from business cards to large-format campaigns.</p>
+                <div class="service-tags">
+                    <span class="service-tag">Editorial</span>
+                    <span class="service-tag">Packaging</span>
+                    <span class="service-tag">Signage</span>
+                </div>
+                <a href="#contact" class="service-cta">Start a Project <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-hashtag"></i></div>
+                <h3>Social Media</h3>
+                <p>Scroll-stopping content and templates that keep your audience engaged.</p>
+                <div class="service-tags">
+                    <span class="service-tag">Templates</span>
+                    <span class="service-tag">Content</span>
+                    <span class="service-tag">Strategy</span>
+                </div>
+                <a href="#contact" class="service-cta">Start a Project <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-box-open"></i></div>
+                <h3>Packaging</h3>
+                <p>Shelf-ready packaging design that tells your product's story at a glance.</p>
+                <div class="service-tags">
+                    <span class="service-tag">Structural</span>
+                    <span class="service-tag">Label Design</span>
+                    <span class="service-tag">Mockups</span>
+                </div>
+                <a href="#contact" class="service-cta">Start a Project <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-film"></i></div>
+                <h3>Motion Graphics</h3>
+                <p>Animated brand assets, explainer videos, and dynamic social content.</p>
+                <div class="service-tags">
+                    <span class="service-tag">Animation</span>
+                    <span class="service-tag">Video</span>
+                    <span class="service-tag">GIFs</span>
+                </div>
+                <a href="#contact" class="service-cta">Start a Project <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CLIENT SERVICE POLICY (replaces How I Work) ===== -->
+    <section class="section policy-section" id="client-policy">
+        <div class="policy-header-top reveal">
+            <div class="policy-brand-badge">
+                <span class="brand-mark">MCUSI <span>COLLECTIVE</span></span>
+                <span class="brand-tag">Client Service Policy</span>
+            </div>
+            <div class="policy-tagline">"Your trusted design partners!"</div>
+        </div>
+
+        <div class="reveal">
+            <h2 class="policy-main-title">Client Service <span class="accent">Policy</span></h2>
+            <p class="policy-subtitle">A clear framework for working together.</p>
+            <p class="policy-intro-text">Our goal is to make every project clear, efficient and enjoyable. Please review our working policy before and during your engagement with Mcusi Collective.</p>
+        </div>
+
+        <div class="policy-grid">
+            <div class="policy-item reveal">
+                <div class="policy-item-icon"></div>
+                <div class="policy-item-content">
+                    <h4>Payment & Onboarding</h4>
+                    <p>Projects under R1500 require full payment upfront. Projects over R1500 require a 50% deposit to secure the booking and commence work. The remaining balance is payable as agreed. Payments must be made using the official banking details provided by Mcusi Collective.</p>
+                    <p class="policy-highlight">No eWallet, Cash Send or Money Voucher payments.</p>
+                </div>
+            </div>
+
+            <div class="policy-item reveal">
+                <div class="policy-item-icon"></div>
+                <div class="policy-item-content">
+                    <h4>Brief & Communication</h4>
+                    <p>Work begins once payment and the required project information/content have been received. Clients are expected to provide clear, consolidated feedback to keep projects moving efficiently.</p>
+                    <p class="policy-highlight">Delays in feedback or content may affect delivery timelines.</p>
+                </div>
+            </div>
+
+            <div class="policy-item reveal">
+                <div class="policy-item-icon"></div>
+                <div class="policy-item-content">
+                    <h4>Revisions & Changes</h4>
+                    <p>Each project includes 3 rounds of revisions. Additional revision rounds are charged at R150 per round.</p>
+                    <p class="policy-highlight">Changes that significantly alter the original brief, concept or scope may be quoted as additional work.</p>
+                </div>
+            </div>
+
+            <div class="policy-item reveal">
+                <div class="policy-item-icon"></div>
+                <div class="policy-item-content">
+                    <h4>Timelines & Urgent Work</h4>
+                    <p>We aim to respond to feedback and requests promptly. Delivery timelines depend on project scope, workload and client responsiveness.</p>
+                    <p class="policy-highlight">Urgent or same-day requests are subject to availability and may incur an additional fee.</p>
+                </div>
+            </div>
+
+            <div class="policy-item reveal">
+                <div class="policy-item-icon"></div>
+                <div class="policy-item-content">
+                    <h4>Cancellation & Approval</h4>
+                    <p>Deposits are non-refundable once work has commenced. Completed work may be billed if a project is cancelled.</p>
+                    <p class="policy-highlight">Clients are responsible for reviewing and approving final artwork. Changes requested after final approval may be treated as additional work.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="policy-footer-block reveal">
+            <div class="policy-footer-cta">
+                <div class="policy-footer-tags">
+                    <span class="policy-footer-tag">Identity</span>
+                    <span class="policy-footer-tag">Design</span>
+                    <span class="policy-footer-tag">Branding</span>
+                    <span class="policy-footer-tag">Photography</span>
+                </div>
+                <h4>Ready to Build?</h4>
+                <p>Please get in touch:</p>
+            </div>
+            <div class="policy-footer-qr">
+                <span class="qr-label">Scan to chat on WhatsApp</span>
+                <canvas id="policyQrCanvas" width="110" height="110"></canvas>
+                <span class="qr-number">065 887 4745</span>
+                <a href="https://wa.me/27658874745?text=Hi%20Mcusi%20Collective%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="policy-wa-btn">
+                    <i class="fab fa-whatsapp"></i> Chat Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BOOKING POLICY (replaces Branding Showcase) ===== -->
+    <section class="section booking-section" id="booking-policy">
+        <div class="booking-brand-row reveal">
+            <span class="brand-mark">MCUSI <span>COLLECTIVE</span></span>
+            <span class="brand-sub">Photography</span>
+        </div>
+
+        <div class="reveal">
+            <div class="booking-notice-pill">
+                <i class="fas fa-exclamation-circle"></i> Important Notice:
+            </div>
+            <h2 class="booking-main-title">BOOKING <span class="accent">POLICY</span></h2>
+            <p class="booking-lead">A <strong>Deposit</strong> is required to secure your booking on a shoot.</p>
+            <ul class="booking-bullets">
+                <li>Dates are only secured upon receipt of deposit.</li>
+                <li>Deposit is non-refundable. (As per agreement)</li>
+                <li>Pending inquiries do not guarantee your slot.</li>
+            </ul>
+        </div>
+
+        <div class="booking-process-header reveal">Booking Process</div>
+
+        <div class="booking-process-grid">
+            <div class="booking-step reveal">
+                <div class="booking-step-circle">01</div>
+                <h4>Select Date & Shoot Type</h4>
+                <p>Choose your preferred slot</p>
+            </div>
+            <div class="booking-step reveal">
+                <div class="booking-step-circle">02</div>
+                <h4>Secure via Proof of Payment</h4>
+                <p>Send through your deposit confirmation</p>
+            </div>
+            <div class="booking-step reveal">
+                <div class="booking-step-circle">03</div>
+                <h4>Confirmation Email/Text</h4>
+                <p>Receive your official booking confirmation</p>
+            </div>
+            <div class="booking-cta-block reveal">
+                <span class="qr-label">Ready to book?<br>Please get in touch:</span>
+                <canvas id="bookingQrCanvas" width="110" height="110"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section testimonial-section" id="testimonials">
+        <div class="section-header reveal">
+            <div class="section-label">Client Love</div>
+            <h2 class="section-title">What clients <span class="accent">say.</span></h2>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-quote">Mcusi Collective transformed our brand from forgettable to unforgettable. Their design thinking is on another level.</div>
+                <div class="testimonial-author">Sarah Mokoena</div>
+                <div class="testimonial-role">Founder, Nova Coffee Roasters</div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-quote">The team understood our vision immediately and delivered a website that exceeded every expectation. True creative partners.</div>
+                <div class="testimonial-author">James van der Merwe</div>
+                <div class="testimonial-role">CEO, Pulse Fitness</div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-quote">Working with Mcusi Collective felt like adding a world-class design team to our company overnight. Incredible results.</div>
+                <div class="testimonial-author">Amara Okafor</div>
+                <div class="testimonial-role">Marketing Director, Bloom Cosmetics</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section contact-section" id="contact">
+        <div class="section-header reveal">
+            <div class="section-label">Get in Touch</div>
+            <h2 class="section-title">Have a project in <span class="accent">mind?</span></h2>
+        </div>
+        <div class="contact-wrapper">
+            <div class="contact-info reveal">
+                <h3>Let's turn your idea into a professional visual identity.</h3>
+                <p>Tell me about your vision. I'll get back to you within 24 hours with next steps.</p>
+
+                <!-- ===== WHATSAPP QR CODE ===== -->
+                <div class="whatsapp-qr-block">
+                    <div class="whatsapp-qr-header">
+                        <i class="fab fa-whatsapp"></i>
+                        <div class="whatsapp-qr-header-text">
+                            <h4>Chat on WhatsApp</h4>
+                            <p>Scan to start a conversation instantly</p>
+                        </div>
+                    </div>
+                    <div class="whatsapp-qr-canvas-wrap">
+                        <canvas id="whatsappQrCanvas" width="140" height="140"></canvas>
+                        <div class="whatsapp-qr-info">
+                            <span class="wa-number">065 887 4745</span>
+                            <span class="wa-hint">Point your phone camera at the QR code to open a WhatsApp chat with us.</span>
+                            <a href="https://wa.me/27658874745?text=Hi%20Mcusi%20Collective%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="whatsapp-qr-btn">
+                                <i class="fab fa-whatsapp"></i> Open WhatsApp Chat
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="contact-form reveal">
+                <form id="contactForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your full name" required>
+                            <div class="form-error" id="nameError">Please enter your name.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                            <div class="form-error" id="emailError">Please enter a valid email.</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company" placeholder="Your company">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Required</label>
+                            <select id="service" name="service" required>
+                                <option value="" disabled selected>Select a service</option>
+                                <option>Brand Identity</option>
+                                <option>Logo Design</option>
+                                <option>Web Design</option>
+                                <option>Print Design</option>
+                                <option>Social Media</option>
+                                <option>Packaging</option>
+                                <option>Motion Graphics</option>
+                            </select>
+                            <div class="form-error" id="serviceError">Please select a service.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Project Description</label>
+                        <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+                        <div class="form-error" id="messageError">Please tell me about your project.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">Budget Range</label>
+                        <select id="budget" name="budget">
+                            <option value="" disabled selected>Select budget range</option>
+                            <option>R5,000 – R15,000</option>
+                            <option>R15,000 – R30,000</option>
+                            <option>R30,000 – R60,000</option>
+                            <option>R60,000+</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="form-submit" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+                <div class="form-success" id="formSuccess">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>Message Sent!</h4>
+                    <p>Thank you for reaching out. I'll be in touch within 24 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-brand">
+            <div class="footer-logo">
+                <i class="fas fa-palette"></i>
+                MCUSI <span>COLLECTIVE</span>
+            </div>
+            <p>Strategic graphic design studio crafting bold identities and digital experiences.</p>
+        </div>
+        <div class="footer-col">
+            <h5>Navigate</h5>
+            <a href="#work">Portfolio</a>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#testimonials">Testimonials</a>
+        </div>
+        <div class="footer-col">
+            <h5>Services</h5>
+            <a href="#services">Brand Identity</a>
+            <a href="#services">Web Design</a>
+            <a href="#services">Print Design</a>
+            <a href="#services">Social Media</a>
+        </div>
+        <div class="footer-col">
+            <h5>Contact</h5>
+            <a href="mailto:thokozaninkabinde012@gmail.com">thokozaninkabinde012@gmail.com</a>
+            <a href="https://wa.me/27658874745" target="_blank" rel="noopener">065 887 4745</a>
+            <a href="#">Johannesburg, SA</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Mcusi Collective. All rights reserved. Crafted with obsession.</p>
+            <a href="#">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== PRELOADER =====
+            const preloader = document.getElementById('preloader');
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }, 1600);
+            });
+
+            // ===== CUSTOM CURSOR =====
+            const cursor = document.getElementById('cursor');
+            const cursorFollower = document.getElementById('cursorFollower');
+            let mouseX = 0, mouseY = 0;
+            let followerX = 0, followerY = 0;
+
+            if (window.innerWidth > 768) {
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    cursor.style.left = mouseX + 'px';
+                    cursor.style.top = mouseY + 'px';
+                });
+
+                function animateFollower() {
+                    followerX += (mouseX - followerX) * 0.12;
+                    followerY += (mouseY - followerY) * 0.12;
+                    cursorFollower.style.left = followerX + 'px';
+                    cursorFollower.style.top = followerY + 'px';
+                    requestAnimationFrame(animateFollower);
+                }
+                animateFollower();
+
+                const interactiveElements = document.querySelectorAll('a, button, .work-item, .service-card, .create-card, .filter-btn, input, select, textarea, .testimonial-card, .whatsapp-qr-btn, .booking-step, .policy-item, .policy-wa-btn');
+                interactiveElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursor.classList.add('hover');
+                        cursorFollower.classList.add('hover');
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursor.classList.remove('hover');
+                        cursorFollower.classList.remove('hover');
+                    });
+                });
+            }
+
+            // ===== NAVIGATION SCROLL =====
+            const nav = document.getElementById('nav');
+            const navLinks = document.querySelectorAll('.nav-link');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+                let current = '';
+                document.querySelectorAll('section[id]').forEach(section => {
+                    const sectionTop = section.offsetTop - 200;
+                    if (window.scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // ===== MOBILE MENU =====
+            const hamburger = document.getElementById('hamburger');
+            const navLinksContainer = document.getElementById('navLinks');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinksContainer.classList.toggle('open');
+            });
+            navLinksContainer.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinksContainer.classList.remove('open');
+                });
+            });
+
+            // ===== SCROLL REVEAL =====
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // ===== ANIMATED COUNTERS =====
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const target = parseInt(el.getAttribute('data-target'));
+                        let current = 0;
+                        const increment = target / 60;
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                el.textContent = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                el.textContent = target + '+';
+                            }
+                        };
+                        updateCounter();
+                        counterObserver.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+            statNumbers.forEach(el => counterObserver.observe(el));
+
+            // ===== PORTFOLIO FILTER =====
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const workItems = document.querySelectorAll('.work-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.getAttribute('data-filter');
+
+                    workItems.forEach(item => {
+                        const category = item.getAttribute('data-category');
+                        if (filter === 'all' || category === filter) {
+                            item.classList.remove('hidden');
+                            item.style.opacity = '0';
+                            item.style.transform = 'scale(0.94)';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                            }, 60);
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // ===== QR CODE GENERATION FOR ALL CANVASES =====
+            (function generateAllQRs() {
+                if (typeof QRCode === 'undefined') return;
+
+                const whatsappUrl = 'https://wa.me/27658874745?text=Hi%20Mcusi%20Collective%2C%20I%27d%20like%20to%20discuss%20a%20project.';
+                const qrOptions = {
+                    margin: 1,
+                    color: { dark: '#0B1E2D', light: '#FFFFFF' },
+                    errorCorrectionLevel: 'M'
+                };
+
+                // Main contact WhatsApp QR
+                const mainCanvas = document.getElementById('whatsappQrCanvas');
+                if (mainCanvas) {
+                    QRCode.toCanvas(mainCanvas, whatsappUrl, { width: 140, ...qrOptions }, function(err) {
+                        if (err) {
+                            console.error('Main QR error:', err);
+                            const wrap = mainCanvas.parentElement;
+                            mainCanvas.style.display = 'none';
+                            const fallback = document.createElement('div');
+                            fallback.style.cssText = 'width:140px;height:140px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#0B1E2D;font-weight:700;font-size:0.75rem;text-align:center;padding:1rem;line-height:1.4;';
+                            fallback.innerHTML = '<i class="fab fa-whatsapp" style="font-size:2rem;color:#25D366;display:block;margin-bottom:0.4rem;"></i>Scan or click to chat';
+                            wrap.insertBefore(fallback, mainCanvas);
+                        }
+                    });
+                }
+
+                // Policy footer QR — WhatsApp chat to 065 887 4745
+                const policyCanvas = document.getElementById('policyQrCanvas');
+                if (policyCanvas) {
+                    QRCode.toCanvas(policyCanvas, whatsappUrl, { width: 110, ...qrOptions }, function(err) {
+                        if (err) console.error('Policy QR error:', err);
+                    });
+                }
+
+                // Booking CTA QR
+                const bookingCanvas = document.getElementById('bookingQrCanvas');
+                if (bookingCanvas) {
+                    QRCode.toCanvas(bookingCanvas, whatsappUrl, { width: 110, ...qrOptions }, function(err) {
+                        if (err) console.error('Booking QR error:', err);
+                    });
+                }
+            })();
+
+            // ===== CONTACT FORM — FORWARDS TO thokozaninkabinde012@gmail.com =====
+            const form = document.getElementById('contactForm');
+            const formSuccess = document.getElementById('formSuccess');
+            const submitBtn = document.getElementById('submitBtn');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let isValid = true;
+
+                const name = document.getElementById('name');
+                const nameError = document.getElementById('nameError');
+                if (!name.value.trim()) {
+                    name.classList.add('error');
+                    nameError.classList.add('visible');
+                    isValid = false;
+                } else {
+                    name.classList.remove('error');
+                    nameError.classList.remove('visible');
+                }
+
+                const email = document.getElementById('email');
+                const emailError = document.getElementById('emailError');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value.trim())) {
+                    email.classList.add('error');
+                    emailError.classList.add('visible');
+                    isValid = false;
+                } else {
+                    email.classList.remove('error');
+                    emailError.classList.remove('visible');
+                }
+
+                const service = document.getElementById('service');
+                const serviceError = document.getElementById('serviceError');
+                if (!service.value) {
+                    service.classList.add('error');
+                    serviceError.classList.add('visible');
+                    isValid = false;
+                } else {
+                    service.classList.remove('error');
+                    serviceError.classList.remove('visible');
+                }
+
+                const message = document.getElementById('message');
+                const messageError = document.getElementById('messageError');
+                if (!message.value.trim()) {
+                    message.classList.add('error');
+                    messageError.classList.add('visible');
+                    isValid = false;
+                } else {
+                    message.classList.remove('error');
+                    messageError.classList.remove('visible');
+                }
+
+                if (isValid) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+                    const company = document.getElementById('company').value.trim();
+                    const budget = document.getElementById('budget').value;
+
+                    const recipient = 'thokozaninkabinde012@gmail.com';
+                    const subject = encodeURIComponent('New Project Inquiry from ' + name.value.trim() + ' — Mcusi Collective Website');
+                    const bodyLines = [
+                        'New project inquiry received via Mcusi Collective website.',
+                        '',
+                        '--- CLIENT DETAILS ---',
+                        'Name: ' + name.value.trim(),
+                        'Email: ' + email.value.trim(),
+                        'Company: ' + (company || 'Not provided'),
+                        '',
+                        '--- PROJECT DETAILS ---',
+                        'Service Required: ' + service.value,
+                        'Budget Range: ' + (budget || 'Not specified'),
+                        '',
+                        'Project Description:',
+                        message.value.trim(),
+                        '',
+                        '--- END OF INQUIRY ---'
+                    ];
+                    const body = encodeURIComponent(bodyLines.join('\n'));
+                    const mailtoLink = 'mailto:' + recipient + '?subject=' + subject + '&body=' + body;
+
+                    setTimeout(() => {
+                        window.location.href = mailtoLink;
+                        setTimeout(() => {
+                            form.style.display = 'none';
+                            formSuccess.classList.add('visible');
+                            formSuccess.querySelector('p').textContent =
+                                'Your email client has been opened with your inquiry. Please hit send to deliver it to thokozaninkabinde012@gmail.com.';
+                        }, 800);
+                    }, 1200);
+                }
+            });
+
+            document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(field => {
+                field.addEventListener('input', () => {
+                    field.classList.remove('error');
+                    const error = field.parentElement.querySelector('.form-error');
+                    if (error) error.classList.remove('visible');
+                });
+            });
+
+            // ===== MARQUEE DUPLICATION =====
+            const marqueeTrack = document.getElementById('marqueeTrack');
+            marqueeTrack.innerHTML += marqueeTrack.innerHTML;
+
+        })();
+    </script>
+
+</body>
+</html>
